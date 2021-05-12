@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "添加车辆",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "test-com": "/components/FL-pciker_view_ts",
+    "test-com1": "/components/FL-pciker_view_ts1"
+  }
+}

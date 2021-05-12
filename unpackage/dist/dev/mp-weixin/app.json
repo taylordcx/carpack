@@ -1,0 +1,41 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/login/login",
+        "pages/vehiclemg/vehiclemg",
+        "pages/woke-inputCar/woke-inputCar"
+    ],
+    "subPackages": [],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "停车场",
+        "navigationBarBackgroundColor": "#ffffff",
+        "backgroundColor": "#ffffff"
+    },
+    "tabBar": {
+        "selectedColor": "#2ca1df",
+        "color": "#555555",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+            {
+                "text": "附近",
+                "pagePath": "pages/index/index",
+                "iconPath": "static/tagbar/carpark.png",
+                "selectedIconPath": "static/tagbar/carpark2.png"
+            },
+            {
+                "text": "个人中心",
+                "pagePath": "pages/vehiclemg/vehiclemg",
+                "iconPath": "static/tagbar/user.png",
+                "selectedIconPath": "static/tagbar/user2.png"
+            }
+        ]
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "11"
+        }
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap97.json"
+}
