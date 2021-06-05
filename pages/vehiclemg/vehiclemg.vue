@@ -6,11 +6,11 @@
 			<image v-else src="../../static/login/user.png"></image>
 			<text v-model="Musername">{{Musername}}</text>
 		</view>
-		<!-- <view class="btn">
+		<view class="btn">
 			<button v-model="show" :style="{'background-color':show=='1'?'#569aff':''}"
 				@click="getTrue">有效</button><button v-model="show" @click="getFalse"
 				:style="{'background-color':show=='2'?'#569aff':''}">失效</button>
-		</view> -->
+		</view>
 		<view class="main" v-for="(list,i) in information" :key="list.id">
 			<view class="header">
 				<view class="top"><text>{{list.carnum}}</text>
@@ -18,7 +18,7 @@
 						:style="{'background-color':type==1?'#3cbd60':'#5686f2'}">新</text> -->
 				</view>
 				<view class="font">
-					<text @click="deletelist(list.id,list.otherId,list.beginTime,list.endTime)">删除</text>
+					<text v-if="showDelete" @click="deletelist(list.id,list.otherId,list.beginTime,list.endTime)">删除</text>
 				</view>
 			</view>
 			<view class="box">
@@ -53,7 +53,8 @@
 				uid: '',
 				sw: true,
 				img: "../../static/login/user.png",
-				show:true
+				show:true,
+				showDelete:false
 			}
 		},
 		onShareAppMessage: function() {
@@ -195,6 +196,7 @@
 			getTrue() {
 				let _that = this;
 				_that.show = '1';
+				_that.showDelete=false;
 				uni.getStorage({
 					key: 'usersId',
 					success: function(res) {
@@ -237,38 +239,39 @@
 				}
 				});
 			},
-			// // 失效
-			// getFalse() {
-			// 	let _that = this;
-			// 	_that.show = '2';
-			// 	// alert(_that.show);
-			// 	uni.getStorage({
-			// 		key: 'usersId',
-			// 		success: function(res) {
-			// 			_that.userid = res.data;
-			// 			uni.request({
+			// 失效
+			getFalse() {
+				let _that = this;
+				_that.show = '2';
+				_that.showDelete=true;
+				// alert(_that.show);
+				uni.getStorage({
+					key: 'usersId',
+					success: function(res) {
+						_that.userid = res.data;
+						uni.request({
 
-			// 				url: 'https://m.zjjiyu.cn/dongtou_park/park_apply_list.jspx',
-			// 				method: 'POST',
-			// 				contentType: 'application/json',
-			// 				dataType: 'json',
-			// 				data: {
-			// 					"usersId": _that.userid,
-			// 					"valid": _that.show
-			// 				},
-			// 				success: (res) => {
+							url: 'https://m.zjjiyu.cn/dongtou_park/park_apply_list.jspx',
+							method: 'POST',
+							contentType: 'application/json',
+							dataType: 'json',
+							data: {
+								"usersId": _that.userid,
+								"valid": _that.show
+							},
+							success: (res) => {
 
-			// 					_that.information=[];
-			// 					_that.information = res.data.data;
-			// 					console.log(_that.information);
-			// 					_that.count = res.data.validSetNum
-			// 				}
+								_that.information=[];
+								_that.information = res.data.data;
+								console.log(_that.information);
+								_that.count = res.data.validSetNum
+							}
 
-			// 			})
-			// 		}
-			// 	});
-			// },
-			//删除 
+						})
+					}
+				});
+			},
+			// 删除 
 			deletelist(id, otherId, btime, endTime) {
 				let _that = this
 				uni.getStorage({
